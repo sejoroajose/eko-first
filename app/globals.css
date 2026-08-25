@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-display-src), ui-serif, Georgia, serif;
+  --font-body: var(--font-body-src), ui-sans-serif, system-ui, sans-serif;
+
+  /* Ink — deep teal-green, primary dark surface & default text */
+  --color-ink: #1e3e3a;
+  --color-ink-light: #2f5c56;
+  --color-ink-dark: #102520;
+
+  /* Gold — hero accent, asked to feature prominently */
+  --color-gold: #ffba33;
+  --color-gold-light: #ffd27a;
+  --color-gold-dark: #e0980a;
+
+  /* Emerald — secondary accent */
+  --color-emerald: #32c76d;
+  --color-emerald-light: #6fdb96;
+  --color-emerald-dark: #1f9a55;
+
+  /* Green — deep brand green, alternate dark surface & CTA */
+  --color-green: #108a00;
+  --color-green-light: #1cb300;
+  --color-green-dark: #0b5e00;
+
+  /* Paper — light section background */
+  --color-paper: #f9fafb;
+}
+
+@utility container {
+  margin-inline: auto;
+  max-width: 1280px;
+  padding-inline: 1.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-body antialiased;
+}
+
+::selection {
+  @apply bg-gold/30 text-ink;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
