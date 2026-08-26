@@ -14,12 +14,12 @@ export default function Home() {
       <SiteHeader />
       <main>
         <Hero />
+        <JoinCta />
         <WhoWeAre />
         <VisionMission />
         <CoreValues />
         <WhatWeDo />
         <Commitments />
-        <JoinCta />
       </main>
       <SiteFooter />
     </>

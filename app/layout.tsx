@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Eko First Movement" />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { LogoMark } from "@/components/logo-mark";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "#who-we-are", label: "About" },
-  { href: "#vision-mission", label: "Vision & Mission" },
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#values", label: "Our Values" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/our-lagos", label: "Our Lagos" },
+  { href: "/get-involved", label: "Get Involved" },
+  { href: "/events", label: "Events" },
+  { href: "/newsroom", label: "Newsroom" },
+  { href: "/leadership", label: "Leadership" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -18,19 +23,19 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur-md">
       <div className="container flex h-[72px] items-center justify-between">
-        <a href="#top" className="shrink-0">
+        <Link href="/" className="shrink-0">
           <LogoMark />
-        </a>
+        </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              className="text-[0.9rem] font-medium text-ink/70 transition-colors hover:text-green"
+              className="text-[0.85rem] font-medium uppercase tracking-wide text-ink/70 transition-colors hover:text-green"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -63,14 +68,14 @@ export function SiteHeader() {
         <div className="min-h-0">
           <nav className="container flex flex-col gap-1 py-4">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2.5 text-[0.95rem] font-medium text-ink/80 hover:bg-green/5 hover:text-green"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href="#join"
