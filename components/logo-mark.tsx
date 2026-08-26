@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function LogoMark({
@@ -12,20 +13,13 @@ export function LogoMark({
 
   return (
     <div className={cn("flex items-center gap-2.5 select-none", className)}>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 30 30"
-        fill="none"
-        aria-hidden="true"
+      <Image
+        src="/ekofirst-icon.png"
+        alt="Eko-First Movement"
+        width={30}
+        height={30}
         className="shrink-0"
-      >
-        <path
-          d="M15 2 C 15 11, 15 11, 6 15 C 15 15, 15 15, 15 28 C 15 15, 15 15, 24 15 C 15 11, 15 11, 15 2 Z"
-          fill={ink}
-        />
-        <circle cx="15" cy="15" r="2.2" fill={sub} />
-      </svg>
+      />
       <span className="flex flex-col leading-none">
         <span
           className="font-display font-bold tracking-tight text-[1.05rem]"
