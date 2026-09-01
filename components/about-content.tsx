@@ -1,5 +1,19 @@
+import Image from "next/image";
 import { Users, TrendingUp, Vote, GraduationCap, Handshake } from "lucide-react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+
+const LEADERS = [
+  {
+    name: "Ààrẹ Laleye Oladipupo. (HON)",
+    role: "Founder",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Soda Oluwaseyi Oyeyinka",
+    role: "Co-Founder",
+    image: "/co-founder.jpg",
+  },
+];
 
 const PILLARS = [
   {
@@ -80,6 +94,40 @@ export function AboutContent() {
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-ink/65">
                   {p.body}
+                </p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      <section className="bg-paper py-24 sm:py-32">
+        <div className="container">
+          <Reveal className="max-w-xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-green">
+              Our Leadership
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-tight text-ink sm:text-[2.75rem]">
+              Founder &amp; Co-Founder
+            </h2>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid gap-8 sm:grid-cols-2 sm:max-w-2xl">
+            {LEADERS.map((leader) => (
+              <RevealItem key={leader.role} className="text-center sm:text-left">
+                <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-ink/5">
+                  <Image
+                    src={leader.image}
+                    alt={leader.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-5 font-display text-xl font-semibold text-ink">
+                  {leader.name}
+                </p>
+                <p className="mt-1 text-sm font-medium uppercase tracking-[0.14em] text-green">
+                  {leader.role}
                 </p>
               </RevealItem>
             ))}
