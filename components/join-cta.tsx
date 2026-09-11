@@ -97,7 +97,7 @@ export function JoinCta() {
             you&rsquo;re based and we&rsquo;ll bring the movement to you.
           </p>
 
-          <div className="mt-10 space-y-4">
+          {/* <div className="mt-10 space-y-4">
             {MEMBERSHIP_TYPES.map((type) => (
               <div
                 key={type.value}
@@ -111,7 +111,7 @@ export function JoinCta() {
                 </p>
               </div>
             ))}
-          </div>
+          </div> */}
         </Reveal>
 
         <Reveal delay={0.1}>
