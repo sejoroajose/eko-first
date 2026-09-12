@@ -50,3 +50,44 @@ export async function insertRegistration(reg: NewRegistration) {
 
   return rows[0] as { id: number; created_at: string };
 }
+
+let onboardingBootstrapped = false;
+
+async function ensureOnboardingSchema(sql: NeonQueryFunction<false, false>) {
+  if (onboardingBootstrapped) return;
+  await sql`
+    CREATE TABLE IF NOT EXISTS onboardings (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT,
+      phone TEXT NOT NULL,
+      lcda TEXT NOT NULL,
+      ward TEXT NOT NULL,
+      brief_profile TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  onboardingBootstrapped = true;
+}
+
+export interface NewOnboarding {
+  name: string;
+  email?: string | null;
+  phone: string;
+  lcda: string;
+  ward: string;
+  briefProfile: string;
+}
+
+export async function insertOnboarding(entry: NewOnboarding) {
+  const sql = getSql();
+  await ensureOnboardingSchema(sql);
+
+  const rows = await sql`
+    INSERT INTO onboardings (name, email, phone, lcda, ward, brief_profile)
+    VALUES (${entry.name}, ${entry.email ?? null}, ${entry.phone}, ${entry.lcda}, ${entry.ward}, ${entry.briefProfile})
+    RETURNING id, created_at
+  `;
+
+  return rows[0] as { id: number; created_at: string };
+}

@@ -77,3 +77,63 @@ export async function sendAdminNotification(
     `,
   });
 }
+
+export interface OnboardingForEmail {
+  name: string;
+  email?: string | null;
+  phone: string;
+  lcda: string;
+  ward: string;
+  briefProfile: string;
+}
+
+export async function sendOnboardingWelcomeEmail(entry: OnboardingForEmail) {
+  if (!entry.email) return;
+  const pingram = getClient();
+
+  await pingram.email.send({
+    type: "welcome_email",
+    to: entry.email,
+    subject: "Welcome to Eko-First Movement",
+    fromName: FROM_NAME,
+    fromAddress: FROM_ADDRESS,
+    html: `
+      <div style="font-family: sans-serif; line-height: 1.6; color: #1E3E3A;">
+        <h1 style="color: #108A00;">Ẹ ṣé, ${entry.name}!</h1>
+        <p>Thank you for onboarding with the Eko-First Movement.</p>
+        <p>We have your details for <strong>${entry.ward}</strong> ward, ${entry.lcda} LCDA.</p>
+        <p>A movement organizer will reach out with next steps soon.</p>
+        <p style="margin-top: 24px; font-weight: 600;">Lagos first. People always.</p>
+      </div>
+    `,
+  });
+}
+
+export async function sendOnboardingAdminNotification(
+  adminEmail: string,
+  entry: OnboardingForEmail
+) {
+  const pingram = getClient();
+
+  await pingram.email.send({
+    type: "admin_registration_notification",
+    to: adminEmail,
+    subject: `New onboarding: ${entry.name} (${entry.lcda})`,
+    fromName: FROM_NAME,
+    fromAddress: FROM_ADDRESS,
+    html: `
+      <div style="font-family: sans-serif; line-height: 1.6; color: #1E3E3A;">
+        <h2>New Eko-First onboarding</h2>
+        <ul>
+          <li><strong>Name:</strong> ${entry.name}</li>
+          <li><strong>Email:</strong> ${entry.email || "—"}</li>
+          <li><strong>Phone:</strong> ${entry.phone}</li>
+          <li><strong>LCDA:</strong> ${entry.lcda}</li>
+          <li><strong>Ward:</strong> ${entry.ward}</li>
+        </ul>
+        <p><strong>Brief profile:</strong></p>
+        <p style="white-space: pre-wrap;">${entry.briefProfile}</p>
+      </div>
+    `,
+  });
+}
